@@ -1,12 +1,17 @@
 (ns iwnroff.status-monitor-service
   (:gen-class)
   (:require [org.httpkit.server :as app-server]
-            [compojure.core :refer [defroutes GET]]))
+            [compojure.core :refer [defroutes GET]]
+            [compojure.route :refer [not-found]]
+            [ring.handler.dump :refer [handle-dump]]
+            [ring.util.response :refer [response]]
+            [iwnroff.helpers-http :refer [http-status-code]]))
 
 (defonce app-server-instance (atom nil))
 
 (defroutes status-monitor
-  (GET "/" [] {:status 200 :body "Status Monitor Dashboard"}))
+  (GET "/" [] {:status (:OK http-status-code) :body "Status Monitor Dashboard"})
+  (GET "/request-dump" [] handle-dump))
 
 (defn stop-app-server
   "Gracefully shutdown the server, waiting 100ms"
@@ -35,8 +40,6 @@
   ;; start application
   (-main "8070")
   
-  (+ 1 2)
-
   ;; stop application
   (stop-app-server)
 

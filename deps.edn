@@ -1,9 +1,11 @@
 {:paths ["src" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         http-kit/http-kit {:mvn/version "2.6.0"}
-        compojure/compojure {:mvn/version "1.7.0"}}
+        compojure/compojure {:mvn/version "1.7.0"}
+        ring/ring-core {:mvn/version "1.9.6"}}
  :aliases
- {:run-m {:main-opts ["-m" "iwnroff.status-monitor-service"]}
+ {:dev {:extra-deps {ring/ring-devel {:mvn/version "1.9.6"}}}
+  :run-m {:main-opts ["-m" "iwnroff.status-monitor-service"]}
   :run-x {:ns-default iwnroff.status-monitor-service
           :exec-fn greet
           :exec-args {:name "Clojure"}}
