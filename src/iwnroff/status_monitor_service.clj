@@ -33,13 +33,13 @@
   "Convenience function to stop and start the application server"
   []
   (stop-app-server)
-  (-main "8070")) 
+  (-main "8070"))
 
 (comment
 
   ;; start application
   (-main "8070")
-  
+
   ;; stop application
   (stop-app-server)
 
